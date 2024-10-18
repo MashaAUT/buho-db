@@ -76,6 +76,56 @@ app.get('/reset', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+// Get all people
+app.get('/people', async (req, res) => {
+    try {
+        await sql.connect(config);
+        const request = new sql.Request();
+        const query = `SELECT * FROM people`;
+        
+        const result = await request.query(query);
+        res.send(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error retrieving people: ' + err.message);
+    }
 });
+
+// Get people by last name
+app.get('/people/lastname/:last_name', async (req, res) => {
+    const { last_name } = req.params;
+
+    try {
+        await sql.connect(config);
+        const request = new sql.Request();
+        const query = `SELECT * FROM people WHERE last_name = @last_name`;
+        
+        // Using parameterized query to prevent SQL injection
+        request.input('last_name', sql.VarChar, last_name);
+        
+        const result = await request.query(query);
+        res.send(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error retrieving people by last name: ' + err.message);
+    }
+});
+
+// Get people by first name and last name
+app.get('/people/fullname/:first_name/:last_name', async (req, res) => {
+    const { first_name, last_name } = req.params;
+
+    try {
+        await sql.connect(config);
+        const request = new sql.Request();
+        const query = `SELECT * FROM people WHERE first_name = @first_name AND last_name = @last_name`;
+        
+        // Using parameterized query to prevent SQL injection
+        request.input('first_name', sql.VarChar, first_name);
+        request.input('last_name', sql.VarChar, last_name);
+        
+        const result = await request.query(query);
+        res.send(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error retrieving people by full name: '
