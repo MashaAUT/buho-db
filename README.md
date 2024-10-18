@@ -1,2 +1,2 @@
-# Octo-project-traceability
-This is a sample project
+# nightwatchDB
+This is a nightwatch db tutorial improve by @Masha

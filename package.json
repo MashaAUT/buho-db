@@ -1,0 +1,20 @@
+{
+  "name": "buho-db",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "glob-run ./test/*.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "express": "^4.21.1",
+    "glob-run": "^0.1.7",
+    "mocha": "^10.7.3",
+    "mssql": "^11.0.1",
+    "nightwatch": "^3.8.0",
+    "nightwatch-mssql-assertions": "^2.2.0"
+  }
+}
