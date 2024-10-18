@@ -1,2 +1,2 @@
 # nightwatchDB
-This is a nightwatch db tutorial improve by @Masha
+This is a nightwatch db tutorial improve by @Masha running on Lnx
